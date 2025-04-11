@@ -4,7 +4,7 @@ import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Dashboard from './pages/Dashboard';
 import MyCases from './pages/MyCases';
-import MainContent from './pages/MainContent';
+import UMCaseReview from './pages/UMCaseReview';
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/my-cases" element={<MyCases />} />
-              <Route path="/main-content/:patientId" element={<MainContent />} />
+              <Route path="/case-review/:caseId" element={<UMCaseReview />} />
             </Routes>
           </div>
         </div>
