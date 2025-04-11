@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Sidebar() {
   return (
@@ -15,10 +16,12 @@ function Sidebar() {
     >
       <h2 style={{ marginBottom: '20px', fontSize: '18px' }}>UM Reviews</h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        <button
+        <Link
+          to="/my-cases"
           style={{
             backgroundColor: '#FF7F11',
             color: 'white',
+            textDecoration: 'none',
             border: 'none',
             padding: '10px 15px',
             borderRadius: '5px',
@@ -27,7 +30,7 @@ function Sidebar() {
           }}
         >
           My Cases
-        </button>
+        </Link>
         <button
           style={{
             backgroundColor: 'transparent',

@@ -1,16 +1,59 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 function MainContent() {
+  const { patientId } = useParams();
+
+  // Mock patient data (in a real app, fetch this data from an API)
+  const patients = {
+    1: {
+      name: 'Robert Williams',
+      hospital: 'Northeastern Health',
+      admitDate: '04/02/2025',
+      diagnosis: 'Congestive Heart Failure',
+      details: 'Patient admitted for acute decompensated heart failure. Requires IV diuresis and oxygen support.',
+    },
+    2: {
+      name: 'Jane Doe',
+      hospital: 'City General Hospital',
+      admitDate: '03/28/2025',
+      diagnosis: 'Pneumonia',
+      details: 'Patient admitted for severe pneumonia. Requires antibiotics and respiratory therapy.',
+    },
+    3: {
+      name: 'John Smith',
+      hospital: 'Westside Medical Center',
+      admitDate: '04/01/2025',
+      diagnosis: 'Diabetes Complications',
+      details: 'Patient admitted for uncontrolled diabetes. Requires insulin therapy and dietary management.',
+    },
+  };
+
+  const patient = patients[patientId];
+
+  if (!patient) {
+    return <div style={{ padding: '20px', fontSize: '18px', color: 'red' }}>Patient not found.</div>;
+  }
+
   return (
-    <div style={{ padding: '20px', backgroundColor: '#f9f9f9', height: '100%', overflowY: 'auto' }}>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', backgroundColor: '#f9f9f9' }}>
       {/* Patient Header */}
-      <div style={{ marginBottom: '20px' }}>
-        <h2>Williams, Robert J.</h2>
-        <p>
+      <div
+        style={{
+          backgroundColor: '#ffffff',
+          border: '1px solid #ddd',
+          borderRadius: '8px',
+          padding: '20px',
+          marginBottom: '20px',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        }}
+      >
+        <h2 style={{ marginBottom: '10px', color: '#333' }}>{patient.name}</h2>
+        <p style={{ margin: '5px 0' }}>
           <strong>MRN:</strong> 763492 | <strong>DOB:</strong> 05/12/1958 (66y) | <strong>Room:</strong> 4W-238 |{' '}
           <strong>Attending:</strong> Dr. Chen, L.
         </p>
-        <p>
+        <p style={{ margin: '5px 0' }}>
           <strong>Admitted:</strong> 04/02/2025 14:26 | <strong>Insurance:</strong> Northeastern Health |{' '}
           <strong>Plan:</strong> Premium PPO
         </p>
@@ -36,18 +79,19 @@ function MainContent() {
 
       {/* Patient Summary */}
       <div>
-        <h3>Patient Summary</h3>
+        <h3 style={{ marginBottom: '15px', color: '#333' }}>Patient Summary</h3>
         <div
           style={{
             backgroundColor: '#fffbea',
             padding: '15px',
-            borderRadius: '5px',
+            borderRadius: '8px',
             marginBottom: '20px',
             border: '1px solid #f0e68c',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
           }}
         >
           <strong>Patient Overview:</strong>
-          <p>
+          <p style={{ marginTop: '10px', lineHeight: '1.6' }}>
             Robert Williams is a 66-year-old male with a history of congestive heart failure, hypertension, type 2
             diabetes, and stage 3 chronic kidney disease. He presented to the emergency department on April 2, 2025,
             with increasing dyspnea, orthopnea, and peripheral edema. Initial evaluation revealed acute decompensated
@@ -59,7 +103,7 @@ function MainContent() {
         {/* Medical Necessity Status */}
         <div style={{ display: 'flex', gap: '20px', marginBottom: '20px' }}>
           <div style={{ flex: 1 }}>
-            <h4>Medical Necessity Status</h4>
+            <h4 style={{ marginBottom: '10px', color: '#333' }}>Medical Necessity Status</h4>
             <div>
               {['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'].map((day, index) => (
                 <div
@@ -71,6 +115,7 @@ function MainContent() {
                     padding: '10px',
                     backgroundColor: '#f4f4f4',
                     borderRadius: '5px',
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
                   }}
                 >
                   <strong style={{ marginRight: '10px' }}>{day}:</strong>
@@ -113,7 +158,7 @@ function MainContent() {
 
           {/* Prior Authorization Requirements */}
           <div style={{ flex: 1 }}>
-            <h4>Prior Authorization Requirements</h4>
+            <h4 style={{ marginBottom: '10px', color: '#333' }}>Prior Authorization Requirements</h4>
             <ul style={{ listStyleType: 'none', padding: 0 }}>
               <li style={{ marginBottom: '10px' }}>
                 <strong>Home Oxygen:</strong> <span style={{ color: 'red' }}>Authorization Required</span>
