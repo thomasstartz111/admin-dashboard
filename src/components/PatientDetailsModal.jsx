@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaComments } from 'react-icons/fa'; // Import the communication icon
 import DailyReviewModal from './DailyReviewModal';
 
 const PatientDetailsModal = ({ patient, onClose }) => {
   const [selectedDay, setSelectedDay] = useState(null);
+  const navigate = useNavigate();
 
   const handleBackgroundClick = (e) => {
     if (e.target.classList.contains('modal-background')) {
@@ -14,6 +17,16 @@ const PatientDetailsModal = ({ patient, onClose }) => {
     // Logic to navigate to the patient's complete medical history
     console.log(`Navigating to Patient Chart for ${patient.name}`);
     // Example: window.location.href = `/patient-chart/${patient.id}`;
+  };
+
+  const handleCommunicationClick = () => {
+    navigate('/communication', {
+      state: {
+        nurse: { name: 'Nurse Jane Doe', phone: '555-123-4567' },
+        physician: { name: 'Dr. John Smith', phone: '555-987-6543' },
+        patient,
+      },
+    });
   };
 
   return (
@@ -83,7 +96,7 @@ const PatientDetailsModal = ({ patient, onClose }) => {
                   <strong>Day {i + 1}:</strong>
                 </span>
                 <span
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${
+                  className={`px-2 py-1 rounded-full text-xs font-medium ${
                     patient.dailyReviews?.[i]?.status === 'Approved'
                       ? 'bg-green-100 text-green-800'
                       : patient.dailyReviews?.[i]?.status === 'Pending Review'
@@ -122,6 +135,17 @@ const PatientDetailsModal = ({ patient, onClose }) => {
             rows="4"
             placeholder="Enter AI review summary..."
           ></textarea>
+        </div>
+
+        {/* Communication Button */}
+        <div className="mb-6">
+          <button
+            onClick={handleCommunicationClick}
+            className="text-blue-500 hover:underline text-sm flex items-center"
+          >
+            <FaComments className="mr-2" />
+            Communication
+          </button>
         </div>
       </div>
 

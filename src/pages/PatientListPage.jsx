@@ -1,38 +1,62 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaComments } from 'react-icons/fa'; // For the communication icon
 import PatientDetailsModal from '../components/PatientDetailsModal';
+import patientsData from '../data/patients.json';
 
 const PatientListPage = () => {
   const [filterStatus, setFilterStatus] = useState('All');
   const [filterHospital, setFilterHospital] = useState('All');
   const [filterDiagnosis, setFilterDiagnosis] = useState('All');
   const [selectedPatient, setSelectedPatient] = useState(null);
+  const [setFilteredPatients] = useState(patientsData);
+  const navigate = useNavigate();
 
-  // Mock patient data
-  const patients = [
-    { id: 1, name: 'Robert Williams', hospital: 'Northeastern Health', admitDate: '04/02/2025', diagnosis: 'Congestive Heart Failure', status: 'Pending Review', los: 6, primaryBarrier: 'Awaiting Placement', lob: 'Commercial' },
-    { id: 2, name: 'Jane Doe', hospital: 'City General Hospital', admitDate: '03/28/2025', diagnosis: 'Pneumonia', status: 'Approved', los: 3, primaryBarrier: 'Insurance Approval', lob: 'Medicare' },
-    { id: 3, name: 'John Smith', hospital: 'Westside Medical Center', admitDate: '04/01/2025', diagnosis: 'Diabetes Complications', status: 'Denied', los: 10, primaryBarrier: 'Rehab Bed Availability', lob: 'Medicaid' },
-    ...Array.from({ length: 17 }, (_, i) => ({
-      id: i + 4,
-      name: `Patient ${i + 4}`,
-      hospital: i % 2 === 0 ? 'Northeastern Health' : 'City General Hospital',
-      admitDate: `04/${String(i + 10).padStart(2, '0')}/2025`,
-      diagnosis: i % 2 === 0 ? 'Hypertension' : 'Asthma',
-      status: i % 3 === 0 ? 'Pending Review' : i % 3 === 1 ? 'Approved' : 'Denied',
-      los: Math.floor(Math.random() * 20) + 1,
-      primaryBarrier: i % 2 === 0 ? 'Awaiting Placement' : 'Insurance Approval',
-      lob: i % 2 === 0 ? 'Commercial' : 'Medicare',
-    })),
-  ];
+  // Example: Filter patients by status
+  const handleFilterStatus = (status) => {
+    if (status === 'All') {
+      setFilteredPatients(patientsData);
+    } else {
+      setFilteredPatients(patientsData.filter((patient) => patient.status === status));
+    }
+  };
 
   // Filter patients based on selected filters
-  const filteredPatients = patients.filter((patient) => {
+  const filteredPatients = patientsData.filter((patient) => {
     const matchesStatus = filterStatus === 'All' || patient.status === filterStatus;
     const matchesHospital = filterHospital === 'All' || patient.hospital === filterHospital;
     const matchesDiagnosis = filterDiagnosis === 'All' || patient.diagnosis === filterDiagnosis;
     return matchesStatus && matchesHospital && matchesDiagnosis;
   });
+
+  // Function to determine the color of the AI Review column
+  const getAIReviewColor = (review) => {
+    switch (review) {
+      case 'Definitively Does Not Meet':
+        return 'bg-red-500 text-white';
+      case 'Likely Does Not Meet':
+        return 'bg-red-300 text-white';
+      case 'Indeterminate':
+        return 'bg-yellow-300 text-black';
+      case 'Likely Meets':
+        return 'bg-green-300 text-black';
+      case 'Definitively Meets':
+        return 'bg-green-500 text-white';
+      default:
+        return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  // Function to handle communication icon click
+  const handleCommunicationClick = (patient) => {
+    navigate('/communication', {
+      state: {
+        nurse: patient.nurse,
+        physician: patient.physician,
+        patient,
+      },
+    });
+  };
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
@@ -41,8 +65,7 @@ const PatientListPage = () => {
       {/* Filters */}
       <div className="flex gap-4 mb-4">
         <select
-          value={filterStatus}
-          onChange={(e) => setFilterStatus(e.target.value)}
+          onChange={(e) => handleFilterStatus(e.target.value)}
           className="p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="All">All Statuses</option>
@@ -50,6 +73,7 @@ const PatientListPage = () => {
           <option value="Approved">Approved</option>
           <option value="Denied">Denied</option>
         </select>
+
         <select
           value={filterHospital}
           onChange={(e) => setFilterHospital(e.target.value)}
@@ -60,6 +84,7 @@ const PatientListPage = () => {
           <option value="City General Hospital">City General Hospital</option>
           <option value="Westside Medical Center">Westside Medical Center</option>
         </select>
+
         <select
           value={filterDiagnosis}
           onChange={(e) => setFilterDiagnosis(e.target.value)}
@@ -80,6 +105,10 @@ const PatientListPage = () => {
           <thead className="bg-gray-100">
             <tr>
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Name</th>
+              <th className="px-4 py-2 text-center text-sm font-medium text-gray-600">Chat</th>
+              <th className="px-4 py-2 text-center text-sm font-medium text-gray-600">AI Review</th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">MRN</th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Reviewing Day</th>
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Hospital</th>
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Admit Date</th>
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Diagnosis</th>
@@ -98,6 +127,21 @@ const PatientListPage = () => {
                 >
                   {patient.name}
                 </td>
+                <td className="px-4 py-2 text-center">
+                  <FaComments
+                    className="text-blue-500 text-xl cursor-pointer hover:text-blue-700"
+                    onClick={() => handleCommunicationClick(patient)}
+                  />
+                </td>
+                <td
+                  className={`px-2 py-1 text-sm text-center rounded-full ${getAIReviewColor(
+                    patient.aiReview
+                  )}`}
+                >
+                  {patient.aiReview}
+                </td>
+                <td className="px-4 py-2 text-sm text-gray-600">{patient.mrn}</td>
+                <td className="px-4 py-2 text-sm text-center">Day {patient.reviewingDay}</td>
                 <td className="px-4 py-2 text-sm text-gray-600">{patient.hospital}</td>
                 <td className="px-4 py-2 text-sm text-gray-600">{patient.admitDate}</td>
                 <td className="px-4 py-2 text-sm text-gray-600">{patient.diagnosis}</td>
