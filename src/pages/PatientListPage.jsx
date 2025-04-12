@@ -1,62 +1,39 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaComments } from 'react-icons/fa'; // For the communication icon
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaComments } from 'react-icons/fa';
 import PatientDetailsModal from '../components/PatientDetailsModal';
-import patientsData from '../data/patients.json';
+import patientsData from '../data/patients.json'; // Import the JSON file
 
 const PatientListPage = () => {
+  const [patients, setPatients] = useState([]);
   const [filterStatus, setFilterStatus] = useState('All');
   const [filterHospital, setFilterHospital] = useState('All');
   const [filterDiagnosis, setFilterDiagnosis] = useState('All');
   const [selectedPatient, setSelectedPatient] = useState(null);
-  const [setFilteredPatients] = useState(patientsData);
   const navigate = useNavigate();
 
-  // Example: Filter patients by status
-  const handleFilterStatus = (status) => {
-    if (status === 'All') {
-      setFilteredPatients(patientsData);
-    } else {
-      setFilteredPatients(patientsData.filter((patient) => patient.status === status));
-    }
+  useEffect(() => {
+    setPatients(patientsData); // Load patients from JSON
+  }, []);
+
+  const handleStatusChange = (id, newStatus) => {
+    setPatients((prevPatients) =>
+      prevPatients.map((patient) =>
+        patient.id === id ? { ...patient, status: newStatus } : patient
+      )
+    );
   };
 
-  // Filter patients based on selected filters
-  const filteredPatients = patientsData.filter((patient) => {
+  const handlePatientClick = (patient) => {
+    setSelectedPatient(patient); // Set the selected patient to open the modal
+  };
+
+  const filteredPatients = patients.filter((patient) => {
     const matchesStatus = filterStatus === 'All' || patient.status === filterStatus;
     const matchesHospital = filterHospital === 'All' || patient.hospital === filterHospital;
     const matchesDiagnosis = filterDiagnosis === 'All' || patient.diagnosis === filterDiagnosis;
     return matchesStatus && matchesHospital && matchesDiagnosis;
   });
-
-  // Function to determine the color of the AI Review column
-  const getAIReviewColor = (review) => {
-    switch (review) {
-      case "Definitively Does Not Meet":
-        return "bg-red-100 text-red-800";
-      case "Likely Does Not Meet":
-        return "bg-red-200 text-red-800";
-      case "Possibly Meets":
-        return "bg-yellow-100 text-yellow-800";
-      case "Likely Meets":
-        return "bg-green-200 text-green-800";
-      case "Definitively Meets":
-        return "bg-green-300 text-green-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
-
-  // Function to handle communication icon click
-  const handleCommunicationClick = (patient) => {
-    navigate('/communication', {
-      state: {
-        nurse: patient.nurse,
-        physician: patient.physician,
-        patient,
-      },
-    });
-  };
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
@@ -65,7 +42,8 @@ const PatientListPage = () => {
       {/* Filters */}
       <div className="flex gap-4 mb-4">
         <select
-          onChange={(e) => handleFilterStatus(e.target.value)}
+          value={filterStatus}
+          onChange={(e) => setFilterStatus(e.target.value)}
           className="p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="All">All Statuses</option>
@@ -73,7 +51,6 @@ const PatientListPage = () => {
           <option value="Approved">Approved</option>
           <option value="Denied">Denied</option>
         </select>
-
         <select
           value={filterHospital}
           onChange={(e) => setFilterHospital(e.target.value)}
@@ -84,7 +61,6 @@ const PatientListPage = () => {
           <option value="City General Hospital">City General Hospital</option>
           <option value="Westside Medical Center">Westside Medical Center</option>
         </select>
-
         <select
           value={filterDiagnosis}
           onChange={(e) => setFilterDiagnosis(e.target.value)}
@@ -113,11 +89,7 @@ const PatientListPage = () => {
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Admit Date</th>
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Diagnosis</th>
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Status</th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">LOS</th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Primary Barrier</th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">LOB</th>
-              <th className="px-4 py-2 text-center text-sm font-medium text-gray-600">Review Completed</th>
-              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Type</th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -125,23 +97,25 @@ const PatientListPage = () => {
               <tr key={patient.id}>
                 <td
                   className="px-4 py-2 text-sm text-blue-500 cursor-pointer hover:underline"
-                  onClick={() => setSelectedPatient(patient)}
+                  onClick={() => handlePatientClick(patient)} // Opens the modal
                 >
                   {patient.name}
                 </td>
                 <td className="px-4 py-2 text-center">
                   <FaComments
                     className="text-blue-500 text-xl cursor-pointer hover:text-blue-700"
-                    onClick={() => handleCommunicationClick(patient)}
+                    onClick={() =>
+                      navigate('/communication', {
+                        state: {
+                          nurse: patient.nurse,
+                          physician: patient.physician,
+                          patient,
+                        },
+                      })
+                    }
                   />
                 </td>
-                <td
-                  className={`px-2 py-1 text-xs text-center rounded-full ${getAIReviewColor(
-                    patient.aiReview
-                  )}`}
-                >
-                  {patient.aiReview}
-                </td>
+                <td className="px-4 py-2 text-sm text-center">{patient.aiReview}</td>
                 <td className="px-4 py-2 text-sm text-gray-600">{patient.mrn}</td>
                 <td className="px-4 py-2 text-sm text-center">Day {patient.reviewingDay}</td>
                 <td className="px-4 py-2 text-sm text-gray-600">{patient.hospital}</td>
@@ -160,21 +134,20 @@ const PatientListPage = () => {
                     {patient.status}
                   </span>
                 </td>
-                <td className="px-4 py-2 text-sm text-gray-600">{patient.los}</td>
-                <td className="px-4 py-2 text-sm text-gray-600">{patient.primaryBarrier}</td>
-                <td className="px-4 py-2 text-sm text-gray-600">{patient.lob}</td>
-
-                {/* New Column: Review Completed */}
-                <td className="px-4 py-2 text-sm text-center">
-                  {patient.reviewCompleted === 'Y' ? (
-                    <span className="text-green-500 font-bold">✔</span>
-                  ) : (
-                    <span className="text-red-500 font-bold">✘</span>
-                  )}
+                <td className="px-4 py-2 text-sm">
+                  <button
+                    className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 mr-2"
+                    onClick={() => handleStatusChange(patient.id, 'Approved')}
+                  >
+                    Approve
+                  </button>
+                  <button
+                    className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                    onClick={() => handleStatusChange(patient.id, 'Denied')}
+                  >
+                    Deny
+                  </button>
                 </td>
-
-                {/* New Column: Type */}
-                <td className="px-4 py-2 text-sm text-gray-600">{patient.type}</td>
               </tr>
             ))}
           </tbody>
@@ -185,7 +158,7 @@ const PatientListPage = () => {
       {selectedPatient && (
         <PatientDetailsModal
           patient={selectedPatient}
-          onClose={() => setSelectedPatient(null)}
+          onClose={() => setSelectedPatient(null)} // Close modal
         />
       )}
     </div>

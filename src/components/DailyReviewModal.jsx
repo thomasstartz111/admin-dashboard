@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const DailyReviewModal = ({ day, review, onClose }) => {
   const [summary, setSummary] = useState(review?.summary || '');
   const [details, setDetails] = useState(review?.details || '');
+  const navigate = useNavigate();
 
   const handleSave = () => {
     // Save the review (e.g., send to API or update state)
@@ -56,13 +58,16 @@ const DailyReviewModal = ({ day, review, onClose }) => {
           ></textarea>
         </div>
 
-        {/* Save Button */}
-        <button
-          onClick={handleSave}
+    
+
+        <div className="flex justify-left mt-4">
+          <button
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-        >
-          Save Review
-        </button>
+          onClick={() => navigate('/history')} // Navigate to the History Page
+          >
+            History Page
+          </button>
+        </div>
       </div>
     </div>
   );

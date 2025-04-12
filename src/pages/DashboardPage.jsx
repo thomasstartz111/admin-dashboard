@@ -31,7 +31,7 @@ const DashboardPage = () => {
       {
         label: 'Number of Reviews',
         data: [120, 90, 75, 60],
-        backgroundColor: ['rgba(76, 175, 80, 0.7)', 'rgba(33, 150, 243, 0.7)', 'rgba(255, 152, 0, 0.7)', 'rgba(244, 67, 54, 0.7)'],
+        backgroundColor: ['rgba(76, 175, 80, 0.7)', 'rgba(33, 150, 243, 0.7)', 'rgba(255, 152, 0.7)', 'rgba(244, 67, 54, 0.7)'],
         borderColor: ['#4CAF50', '#2196F3', '#FF9800', '#F44336'],
         borderWidth: 1,
       },
@@ -124,8 +124,9 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
+    <div className="p-6 bg-gray-50 min-h-screen">
+      <h1 className="text-2xl font-bold text-gray-800 mb-4">Dashboard</h1>
+      <p className="text-gray-600">Welcome to the Daisy AI Dashboard!</p>
 
       {/* Reviews by Hospital */}
       <div className="mb-6">

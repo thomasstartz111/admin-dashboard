@@ -1,16 +1,23 @@
 import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const CommunicationPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { nurse, physician, patient } = location.state || {};
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Communication Details</h2>
+    <div className="p-6 bg-gray-50 min-h-screen">
+      <h1 className="text-2xl font-bold text-gray-800 mb-4">Communication Details</h1>
+
+      {/* Patient Details */}
+      <div className="mb-6">
+        <h2 className="text-lg font-semibold">Patient: {patient?.name || 'N/A'}</h2>
+        <p className="text-gray-600">Diagnosis: {patient?.diagnosis || 'N/A'}</p>
+      </div>
 
       {/* Nurse Details */}
-      <div className="mb-4">
+      <div className="mb-6">
         <h3 className="text-lg font-semibold">Main Communication Nurse</h3>
         <p>
           <strong>Name:</strong> {nurse?.name || 'N/A'}
@@ -21,7 +28,7 @@ const CommunicationPage = () => {
       </div>
 
       {/* Physician Details */}
-      <div className="mb-4">
+      <div className="mb-6">
         <h3 className="text-lg font-semibold">Patient's Physician</h3>
         <p>
           <strong>Name:</strong> {physician?.name || 'N/A'}
@@ -39,20 +46,17 @@ const CommunicationPage = () => {
           rows="4"
           placeholder="Enter your message here..."
         ></textarea>
-        <div className="mt-4">
+        <div className="mt-4 flex gap-4">
           <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
             Send Message
           </button>
+          <button
+            className="bg-white text-blue-500 px-4 py-2 rounded-md border border-blue-500 hover:bg-blue-100"
+            onClick={() => navigate('/messages')} // Navigate to the Messages Page
+          >
+            Message History
+          </button>
         </div>
-      </div>
-
-      {/* View Messages Chip */}
-      <div className="mt-6">
-        <Link to="/messages">
-          <span className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium cursor-pointer hover:bg-blue-200">
-            View Messages
-          </span>
-        </Link>
       </div>
     </div>
   );

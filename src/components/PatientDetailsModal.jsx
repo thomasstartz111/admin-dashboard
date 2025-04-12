@@ -137,18 +137,7 @@ const PatientDetailsModal = ({ patient, onClose }) => {
           ></textarea>
         </div>
 
-        {/* Communication Button */}
-        <div className="mb-6">
-          <button
-            onClick={handleCommunicationClick}
-            className="text-blue-500 hover:underline text-sm flex items-center"
-          >
-            <FaComments className="mr-2" />
-            Communication
-          </button>
-        </div>
-      </div>
-
+     
       {/* Daily Review Modal */}
       {selectedDay && (
         <DailyReviewModal
@@ -156,7 +145,8 @@ const PatientDetailsModal = ({ patient, onClose }) => {
           review={patient.dailyReviews?.[selectedDay - 1]}
           onClose={() => setSelectedDay(null)}
         />
-      )}
+    )}
+      </div>
     </div>
   );
 };

@@ -130,6 +130,9 @@ const ReviewQueueTable = () => {
                   <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Review Chart
                   </th>
+                  <th scope="col" className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    History
+                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -185,6 +188,14 @@ const ReviewQueueTable = () => {
                     <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
                       <button className="text-purple-600 hover:text-purple-800">
                         <FileText size={16} />
+                      </button>
+                    </td>
+                    <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+                      <button
+                        className="text-blue-600 hover:text-blue-800"
+                        onClick={() => navigate('/history')}
+                      >
+                        History
                       </button>
                     </td>
                   </tr>
