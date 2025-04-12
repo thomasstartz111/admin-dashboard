@@ -32,18 +32,18 @@ const PatientListPage = () => {
   // Function to determine the color of the AI Review column
   const getAIReviewColor = (review) => {
     switch (review) {
-      case 'Definitively Does Not Meet':
-        return 'bg-red-500 text-white';
-      case 'Likely Does Not Meet':
-        return 'bg-red-300 text-white';
-      case 'Indeterminate':
-        return 'bg-yellow-300 text-black';
-      case 'Likely Meets':
-        return 'bg-green-300 text-black';
-      case 'Definitively Meets':
-        return 'bg-green-500 text-white';
+      case "Definitively Does Not Meet":
+        return "bg-red-100 text-red-800";
+      case "Likely Does Not Meet":
+        return "bg-red-200 text-red-800";
+      case "Possibly Meets":
+        return "bg-yellow-100 text-yellow-800";
+      case "Likely Meets":
+        return "bg-green-200 text-green-800";
+      case "Definitively Meets":
+        return "bg-green-300 text-green-800";
       default:
-        return 'bg-gray-100 text-gray-800';
+        return "bg-gray-100 text-gray-800";
     }
   };
 
@@ -116,6 +116,8 @@ const PatientListPage = () => {
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">LOS</th>
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Primary Barrier</th>
               <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">LOB</th>
+              <th className="px-4 py-2 text-center text-sm font-medium text-gray-600">Review Completed</th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-600">Type</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -134,7 +136,7 @@ const PatientListPage = () => {
                   />
                 </td>
                 <td
-                  className={`px-2 py-1 text-sm text-center rounded-full ${getAIReviewColor(
+                  className={`px-2 py-1 text-xs text-center rounded-full ${getAIReviewColor(
                     patient.aiReview
                   )}`}
                 >
@@ -161,6 +163,18 @@ const PatientListPage = () => {
                 <td className="px-4 py-2 text-sm text-gray-600">{patient.los}</td>
                 <td className="px-4 py-2 text-sm text-gray-600">{patient.primaryBarrier}</td>
                 <td className="px-4 py-2 text-sm text-gray-600">{patient.lob}</td>
+
+                {/* New Column: Review Completed */}
+                <td className="px-4 py-2 text-sm text-center">
+                  {patient.reviewCompleted === 'Y' ? (
+                    <span className="text-green-500 font-bold">✔</span>
+                  ) : (
+                    <span className="text-red-500 font-bold">✘</span>
+                  )}
+                </td>
+
+                {/* New Column: Type */}
+                <td className="px-4 py-2 text-sm text-gray-600">{patient.type}</td>
               </tr>
             ))}
           </tbody>

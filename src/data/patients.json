@@ -12,6 +12,8 @@
     "primaryBarrier": "Insurance Approval",
     "lob": "Medicare",
     "aiReview": "Likely Meets",
+    "reviewCompleted": "N",
+    "type": "DRG",
     "chart": "Patient presents with shortness of breath, fatigue, and swelling in the lower extremities. Echocardiogram shows reduced ejection fraction. Lab results indicate elevated BNP levels. Patient has a history of hypertension and diabetes. Current medications include beta-blockers and ACE inhibitors. Plan includes diuresis, optimization of heart failure medications, and close monitoring of renal function."
   },
   {
@@ -27,6 +29,8 @@
     "primaryBarrier": "None",
     "lob": "Private Insurance",
     "aiReview": "Definitively Meets",
+    "reviewCompleted": "Y",
+    "type": "Per Diem",
     "chart": "Patient admitted with fever, productive cough, and shortness of breath. Chest X-ray shows consolidation in the right lower lobe. Blood cultures are pending. Patient has a history of asthma. Initial treatment includes IV antibiotics and supplemental oxygen. Plan includes monitoring for clinical improvement and follow-up imaging."
   },
   {
@@ -42,21 +46,25 @@
     "primaryBarrier": "Incomplete Documentation",
     "lob": "Medicaid",
     "aiReview": "Does Not Meet Criteria",
+    "reviewCompleted": "N",
+    "type": "DRG",
     "chart": "Patient presents with hyperglycemia, polyuria, and confusion. Lab results show blood glucose of 450 mg/dL and elevated ketones. Patient has a history of poorly controlled Type 2 diabetes. Treatment includes IV fluids, insulin therapy, and electrolyte replacement. Plan includes diabetes education and follow-up with endocrinology."
   },
   {
     "id": 4,
     "name": "Emily Davis",
     "mrn": "345678",
-    "reviewingDay": 4,
-    "hospital": "Northeastern Health",
+    "reviewingDay": 1,
+    "hospital": "City General Hospital",
     "admitDate": "2025-04-04",
     "diagnosis": "Hypertension",
     "status": "Pending Review",
     "los": 2,
-    "primaryBarrier": "Medication Adjustment",
-    "lob": "Medicare",
-    "aiReview": "Indeterminate",
+    "primaryBarrier": "None",
+    "lob": "Private Insurance",
+    "aiReview": "Possibly Meets",
+    "reviewCompleted": "Y",
+    "type": "Per Diem",
     "chart": "Patient presents with elevated blood pressure readings over the past week. No signs of end-organ damage. Current medications include a calcium channel blocker. Plan includes adjusting antihypertensive therapy and monitoring for improvement."
   },
   {
@@ -72,6 +80,8 @@
     "primaryBarrier": "None",
     "lob": "Private Insurance",
     "aiReview": "Definitively Meets",
+    "reviewCompleted": "Y",
+    "type": "Per Diem",
     "chart": "Patient presents with acute exacerbation of asthma triggered by seasonal allergies. Treatment includes nebulized bronchodilators and corticosteroids. Plan includes discharge with a short course of oral steroids and follow-up with a pulmonologist."
   },
   {
@@ -87,6 +97,8 @@
     "primaryBarrier": "Insurance Denial",
     "lob": "Medicaid",
     "aiReview": "Likely Does Not Meet",
+    "reviewCompleted": "N",
+    "type": "DRG",
     "chart": "Patient presents with worsening dyspnea and peripheral edema. Echocardiogram shows severe left ventricular dysfunction. Patient has a history of noncompliance with medications. Plan includes diuresis and optimization of heart failure therapy."
   },
   {
@@ -102,6 +114,8 @@
     "primaryBarrier": "Delayed Diagnosis",
     "lob": "Medicare",
     "aiReview": "Indeterminate",
+    "reviewCompleted": "N",
+    "type": "Per Diem",
     "chart": "Patient admitted with fever, chills, and productive cough. Chest X-ray shows bilateral infiltrates. Blood cultures are positive for Streptococcus pneumoniae. Treatment includes IV antibiotics and supportive care."
   },
   {
@@ -117,6 +131,8 @@
     "primaryBarrier": "None",
     "lob": "Private Insurance",
     "aiReview": "Definitively Meets",
+    "reviewCompleted": "Y",
+    "type": "DRG",
     "chart": "Patient presents with diabetic ketoacidosis. Lab results show elevated blood glucose and ketones. Treatment includes IV fluids, insulin therapy, and electrolyte replacement. Plan includes diabetes education and follow-up with endocrinology."
   },
   {
@@ -132,6 +148,8 @@
     "primaryBarrier": "Incomplete Documentation",
     "lob": "Medicaid",
     "aiReview": "Does Not Meet Criteria",
+    "reviewCompleted": "N",
+    "type": "Per Diem",
     "chart": "Patient presents with elevated blood pressure readings. No evidence of end-organ damage. Plan includes lifestyle modifications and initiation of antihypertensive therapy."
   },
   {
@@ -147,6 +165,8 @@
     "primaryBarrier": "None",
     "lob": "Medicare",
     "aiReview": "Likely Meets",
+    "reviewCompleted": "N",
+    "type": "DRG",
     "chart": "Patient presents with wheezing and shortness of breath. History of asthma exacerbations triggered by environmental allergens. Treatment includes nebulized bronchodilators and corticosteroids. Plan includes discharge with a short course of oral steroids and follow-up with a pulmonologist."
   }
 ]
