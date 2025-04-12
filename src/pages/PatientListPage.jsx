@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import PatientDetailsCard from '../components/PatientDetailsCard';
+import { Link } from 'react-router-dom';
+import PatientDetailsModal from '../components/PatientDetailsModal';
 
-function MainContent() {
-  const { patientId } = useParams();
-  const [activeTab, setActiveTab] = useState('Summary');
+const PatientListPage = () => {
   const [filterStatus, setFilterStatus] = useState('All');
   const [filterHospital, setFilterHospital] = useState('All');
   const [filterDiagnosis, setFilterDiagnosis] = useState('All');
-  const [currentPage, setCurrentPage] = useState(1);
-  const patientsPerPage = 6;
+  const [selectedPatient, setSelectedPatient] = useState(null);
 
-  // Mock patient data (in a real app, fetch this data from an API)
+  // Mock patient data
   const patients = [
     { id: 1, name: 'Robert Williams', hospital: 'Northeastern Health', admitDate: '04/02/2025', diagnosis: 'Congestive Heart Failure', status: 'Pending Review', los: 6, primaryBarrier: 'Awaiting Placement', lob: 'Commercial' },
     { id: 2, name: 'Jane Doe', hospital: 'City General Hospital', admitDate: '03/28/2025', diagnosis: 'Pneumonia', status: 'Approved', los: 3, primaryBarrier: 'Insurance Approval', lob: 'Medicare' },
     { id: 3, name: 'John Smith', hospital: 'Westside Medical Center', admitDate: '04/01/2025', diagnosis: 'Diabetes Complications', status: 'Denied', los: 10, primaryBarrier: 'Rehab Bed Availability', lob: 'Medicaid' },
-    // Add more patients here (we'll generate 20 examples below)
     ...Array.from({ length: 17 }, (_, i) => ({
       id: i + 4,
       name: `Patient ${i + 4}`,
@@ -38,15 +34,9 @@ function MainContent() {
     return matchesStatus && matchesHospital && matchesDiagnosis;
   });
 
-  // Pagination logic
-  const indexOfLastPatient = currentPage * patientsPerPage;
-  const indexOfFirstPatient = indexOfLastPatient - patientsPerPage;
-  const currentPatients = filteredPatients.slice(indexOfFirstPatient, indexOfLastPatient);
-  const totalPages = Math.ceil(filteredPatients.length / patientsPerPage);
-
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">Patient Management</h1>
+      <h1 className="text-2xl font-bold text-gray-800 mb-4">Patient List</h1>
 
       {/* Filters */}
       <div className="flex gap-4 mb-4">
@@ -100,9 +90,14 @@ function MainContent() {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {currentPatients.map((patient) => (
+            {filteredPatients.map((patient) => (
               <tr key={patient.id}>
-                <td className="px-4 py-2 text-sm text-gray-800">{patient.name}</td>
+                <td
+                  className="px-4 py-2 text-sm text-blue-500 cursor-pointer hover:underline"
+                  onClick={() => setSelectedPatient(patient)}
+                >
+                  {patient.name}
+                </td>
                 <td className="px-4 py-2 text-sm text-gray-600">{patient.hospital}</td>
                 <td className="px-4 py-2 text-sm text-gray-600">{patient.admitDate}</td>
                 <td className="px-4 py-2 text-sm text-gray-600">{patient.diagnosis}</td>
@@ -128,22 +123,15 @@ function MainContent() {
         </table>
       </div>
 
-      {/* Pagination */}
-      <div className="flex justify-center mt-4">
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentPage(i + 1)}
-            className={`px-3 py-1 mx-1 rounded-md ${
-              currentPage === i + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'
-            }`}
-          >
-            {i + 1}
-          </button>
-        ))}
-      </div>
+      {/* Patient Details Modal */}
+      {selectedPatient && (
+        <PatientDetailsModal
+          patient={selectedPatient}
+          onClose={() => setSelectedPatient(null)}
+        />
+      )}
     </div>
   );
-}
+};
 
-export default MainContent;
+export default PatientListPage;

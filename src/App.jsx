@@ -1,29 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
-import Dashboard from './pages/Dashboard';
-import MyCases from './pages/MyCases';
-import UMCaseReview from './pages/UMCaseReview';
+import PatientListPage from './pages/PatientListPage';
+import MainContent from './pages/MainContent';
 
-function App() {
+const App = () => {
   return (
     <Router>
-      <div style={{ display: 'flex', height: '100vh' }}>
-        <Sidebar />
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <Header />
-          <div style={{ flex: 1, overflowY: 'auto' }}>
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/my-cases" element={<MyCases />} />
-              <Route path="/case-review/:caseId" element={<UMCaseReview />} />
-            </Routes>
-          </div>
-        </div>
-      </div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<div className="p-6">Welcome to the Dashboard</div>} />
+        <Route path="/patients" element={<PatientListPage />} />
+        <Route path="/patients/:patientId" element={<MainContent />} />
+      </Routes>
     </Router>
   );
-}
+};
 
 export default App;
