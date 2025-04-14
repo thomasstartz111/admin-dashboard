@@ -3,13 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import DailyReviewModal from './DailyReviewModal';
 import EvaluationDetailsTable from './EvaluationDetailsTable';
 import { diffWords } from 'diff';
+import evaluationData from '../data/evaluationDetails.json'; // Import the JSON data
 
 const PatientDetailsModal = ({ patient, onClose }) => {
   const [selectedDay, setSelectedDay] = useState(null);
   const navigate = useNavigate();
   const [editedClinicalNote, setEditedClinicalNote] = useState(patient.clinicalNote || ''); // Provide a default value
-
-
 
   const handleBackgroundClick = (e) => {
     if (e.target.classList.contains('modal-background')) {

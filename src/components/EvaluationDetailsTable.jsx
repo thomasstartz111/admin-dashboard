@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import EvaluationDetailsTable from './EvaluationDetailsTable';
 
-const EvaluationDetailsTableComponent = ({ evaluationData }) => {
+const EvaluationDetailsTable = ({ evaluationData }) => {
   const [expandedSubsets, setExpandedSubsets] = useState({});
   const [expandedCriteria, setExpandedCriteria] = useState({});
   const [overwrittenDecisions, setOverwrittenDecisions] = useState({});
