@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Subset 1",
+    "criteria": [
+      {
+        "name": "Impending intubation",
+        "evaluation": "Definitively Meets",
+        "details": "The patient is showing signs of respiratory failure requiring intubation."
+      },
+      {
+        "name": "NIPPV",
+        "evaluation": "Possibly Meets",
+        "details": "Non-invasive positive pressure ventilation is being considered."
+      },
+      {
+        "name": "Mechanical ventilation",
+        "evaluation": "Definitively Does Not Meet",
+        "details": "No evidence of mechanical ventilation in the clinical notes."
+      }
+    ]
+  },
+  {
+    "name": "Subset 2",
+    "criteria": [
+      {
+        "name": "O2 sat < 89%",
+        "evaluation": "Definitively Meets",
+        "details": "The patient’s oxygen saturation dropped below 89% during exertion."
+      },
+      {
+        "name": "Arterial Po2 < 56 mmHg",
+        "evaluation": "Possibly Meets",
+        "details": "Arterial Po2 levels are borderline and require further monitoring."
+      }
+    ]
+  }
+]

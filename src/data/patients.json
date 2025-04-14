@@ -1,563 +1,197 @@
 [
-    {
-      "id": 1,
-      "name": "Robert Williams",
-      "hospital": "Northeastern Health",
-      "admitDate": "04/02/2025",
-      "diagnosis": "Congestive Heart Failure",
-      "status": "Pending Review",
-      "los": 6,
-      "primaryBarrier": "Awaiting Placement",
-      "lob": "Commercial",
-      "mrn": "12345",
-      "aiReview": "Likely Meets",
-      "reviewingDay": 3,
-      "nurse": { "name": "Nurse Jane Doe", "phone": "555-123-4567" },
-      "physician": { "name": "Dr. John Smith", "phone": "555-987-6543" },
-      "history": [
-        {
-          "day": 1,
-          "summary": "Stable condition",
-          "details": "Patient is responding well to treatment."
-        },
-        {
-          "day": 2,
-          "summary": "Improved vitals",
-          "details": "Blood pressure and heart rate are normal."
-        }
-      ],
-      "evaluationDetails": {
-        "criteria": [
-          {
-            "name": "Impending intubation",
-            "evaluation": "Definitively Does Not Meet",
-            "details": "No indication of intubation required."
-          },
-          {
-            "name": "NIPPV",
-            "evaluation": "Definitively Does Not Meet",
-            "details": "No indication of NIPPV required."
-          }
-        ]
-      }
-    },
-    {
-      "id": 2,
-      "name": "Jane Doe",
-      "hospital": "City General Hospital",
-      "admitDate": "03/28/2025",
-      "diagnosis": "Pneumonia",
-      "status": "Approved",
-      "los": 3,
-      "primaryBarrier": "Insurance Approval",
-      "lob": "Medicare",
-      "mrn": "67890",
-      "aiReview": "Definitively Meets",
-      "reviewingDay": 5,
-      "nurse": { "name": "Nurse Alice Brown", "phone": "555-456-7890" },
-      "physician": { "name": "Dr. Emily Davis", "phone": "555-654-3210" },
-      "history": [
-        {
-          "day": 1,
-          "summary": "Patient admitted with pneumonia symptoms.",
-          "details": "Patient is receiving antibiotics and oxygen therapy."
-        }
-      ],
-      "evaluationDetails": {
-        "criteria": [
-          {
-            "name": "Pneumonia by imaging",
-            "evaluation": "Definitively Meets",
-            "details": "CT chest confirms multifocal pneumonia."
-          }
-        ]
-      }
-    },
-    {
-      "id": 3,
-      "name": "John Smith",
-      "hospital": "Westside Medical Center",
-      "admitDate": "04/01/2025",
-      "diagnosis": "Diabetes Complications",
-      "status": "Denied",
-      "los": 10,
-      "primaryBarrier": "Rehab Bed Availability",
-      "lob": "Medicaid",
-      "mrn": "11223",
-      "aiReview": "Definitively Does Not Meet",
-      "reviewingDay": 2,
-      "nurse": { "name": "Nurse Robert Johnson", "phone": "555-234-5678" },
-      "physician": { "name": "Dr. Sarah Wilson", "phone": "555-876-5432" },
-      "history": [],
-      "evaluationDetails": {}
-    },
-    {
-      "id": 4,
-      "name": "Maria Garcia",
-      "hospital": "Memorial Hospital",
-      "admitDate": "04/05/2025",
-      "diagnosis": "COPD Exacerbation",
-      "status": "Under Review",
-      "los": 4,
-      "primaryBarrier": "Awaiting Home O2 Setup",
-      "lob": "Medicare Advantage",
-      "mrn": "33445",
-      "aiReview": "Possibly Meets",
-      "reviewingDay": 2,
-      "nurse": { "name": "Nurse David Chen", "phone": "555-345-6789" },
-      "physician": { "name": "Dr. Lisa Martinez", "phone": "555-765-4321" },
-      "history": [
-        {
-          "day": 1,
-          "summary": "Admitted with respiratory distress",
-          "details": "Patient requires supplemental oxygen and nebulizer treatments."
-        },
-        {
-          "day": 2,
-          "summary": "Improved breathing",
-          "details": "Patient's oxygen saturation has improved to 94% on 2L."
-        }
-      ],
-      "evaluationDetails": {
-        "criteria": [
-          {
-            "name": "O2 ≥ 40%",
-            "evaluation": "Definitively Does Not Meet",
-            "details": "Patient on 2L nasal cannula only."
-          }
-        ]
-      }
-    },
-    {
-      "id": 5,
-      "name": "James Johnson",
-      "hospital": "University Medical Center",
-      "admitDate": "03/30/2025",
-      "diagnosis": "Sepsis",
-      "status": "Approved",
-      "los": 8,
-      "primaryBarrier": "Clinical Stability",
-      "lob": "Commercial",
-      "mrn": "55667",
-      "aiReview": "Definitively Meets",
-      "reviewingDay": 6,
-      "nurse": { "name": "Nurse Michelle Lee", "phone": "555-456-7890" },
-      "physician": { "name": "Dr. Thomas Brown", "phone": "555-654-3210" },
-      "history": [
-        {
-          "day": 1,
-          "summary": "Admitted with fever and hypotension",
-          "details": "Started on broad-spectrum antibiotics and fluid resuscitation."
-        },
-        {
-          "day": 3,
-          "summary": "Blood cultures positive",
-          "details": "Antibiotics narrowed based on culture results."
-        },
-        {
-          "day": 5,
-          "summary": "Clinical improvement",
-          "details": "Vitals stabilized, WBC decreasing."
-        }
-      ],
-      "evaluationDetails": {
-        "criteria": [
-          {
-            "name": "vasoactive/inotrope",
-            "evaluation": "Definitively Meets",
-            "details": "Required norepinephrine for first 48 hours of admission."
-          }
-        ]
-      }
-    },
-    {
-      "id": 6,
-      "name": "Emily Wilson",
-      "hospital": "Coastal Medical Center",
-      "admitDate": "04/08/2025",
-      "diagnosis": "Acute Stroke",
-      "status": "Pending Review",
-      "los": 2,
-      "primaryBarrier": "Rehab Placement",
-      "lob": "Medicare",
-      "mrn": "77889",
-      "aiReview": "Likely Meets",
-      "reviewingDay": 1,
-      "nurse": { "name": "Nurse William Taylor", "phone": "555-567-8901" },
-      "physician": { "name": "Dr. Jennifer Kim", "phone": "555-543-2109" },
-      "history": [
-        {
-          "day": 1,
-          "summary": "Admitted with right-sided weakness",
-          "details": "MRI confirms left MCA territory infarct. Started on aspirin and statin."
-        }
-      ],
-      "evaluationDetails": {
-        "criteria": [
-          {
-            "name": "Subset 1",
-            "evaluation": "Definitively Meets",
-            "details": "Acute stroke with documented neurological deficit."
-          }
-        ]
-      }
-    },
-    {
-      "id": 7,
-      "name": "Michael Brown",
-      "hospital": "Northside Hospital",
-      "admitDate": "04/03/2025",
-      "diagnosis": "Acute Myocardial Infarction",
-      "status": "Approved",
-      "los": 5,
-      "primaryBarrier": "Cardiac Rehabilitation Placement",
-      "lob": "Commercial",
-      "mrn": "99001",
-      "aiReview": "Definitively Meets",
-      "reviewingDay": 4,
-      "nurse": { "name": "Nurse Jessica Adams", "phone": "555-678-9012" },
-      "physician": { "name": "Dr. Robert Chen", "phone": "555-432-1098" },
-      "history": [
-        {
-          "day": 1,
-          "summary": "Presented with chest pain",
-          "details": "STEMI confirmed. Underwent emergent cardiac catheterization with stent placement."
-        },
-        {
-          "day": 2,
-          "summary": "Post-procedure recovery",
-          "details": "Stable vitals, minimal chest discomfort."
-        },
-        {
-          "day": 3,
-          "summary": "Started cardiac rehab",
-          "details": "Tolerating ambulation. Started on dual antiplatelet therapy and beta blocker."
-        }
-      ],
-      "evaluationDetails": {
-        "criteria": [
-          {
-            "name": "Subset 2",
-            "evaluation": "Definitively Meets",
-            "details": "Confirmed STEMI with intervention."
-          }
-        ]
-      }
-    },
-    {
-      "id": 8,
-      "name": "Sarah Martinez",
-      "hospital": "Eastside Medical",
-      "admitDate": "04/07/2025",
-      "diagnosis": "Diabetic Ketoacidosis",
-      "status": "Under Review",
-      "los": 3,
-      "primaryBarrier": "Social Work Consult",
-      "lob": "Medicaid",
-      "mrn": "22334",
-      "aiReview": "Possibly Meets",
-      "reviewingDay": 2,
-      "nurse": { "name": "Nurse Christopher Wang", "phone": "555-789-0123" },
-      "physician": { "name": "Dr. Amanda Rivera", "phone": "555-321-0987" },
-      "history": [
-        {
-          "day": 1,
-          "summary": "Admitted with hyperglycemia and metabolic acidosis",
-          "details": "Started on insulin drip and IV fluids."
-        },
-        {
-          "day": 2,
-          "summary": "Improved acidosis",
-          "details": "Transitioned to subcutaneous insulin. Anion gap closing."
-        }
-      ],
-      "evaluationDetails": {
-        "criteria": [
-          {
-            "name": "Impending intubation",
-            "evaluation": "Definitively Does Not Meet",
-            "details": "No respiratory compromise."
-          }
-        ]
-      }
-    },
-    {
-      "id": 9,
-      "name": "David Lee",
-      "hospital": "Valley Regional Hospital",
-      "admitDate": "04/01/2025",
-      "diagnosis": "Community Acquired Pneumonia",
-      "status": "Denied",
-      "los": 7,
-      "primaryBarrier": "Insurance Authorization",
-      "lob": "Commercial",
-      "mrn": "44556",
-      "aiReview": "Definitively Does Not Meet",
-      "reviewingDay": 5,
-      "nurse": { "name": "Nurse Elizabeth Brooks", "phone": "555-890-1234" },
-      "physician": { "name": "Dr. Michael Wong", "phone": "555-210-9876" },
-      "history": [
-        {
-          "day": 1,
-          "summary": "Admitted with fever and productive cough",
-          "details": "Started on IV antibiotics."
-        },
-        {
-          "day": 3,
-          "summary": "Persistent fever",
-          "details": "Respiratory culture results pending. Continued antibiotics."
-        },
-        {
-          "day": 5,
-          "summary": "Clinical improvement",
-          "details": "Afebrile for 24 hours. Improved oxygen saturation."
-        }
-      ],
-      "evaluationDetails": {
-        "criteria": [
-          {
-            "name": "pneumonia by imaging",
-            "evaluation": "Definitively Meets",
-            "details": "Chest X-ray shows right lower lobe infiltrate."
-          },
-          {
-            "name": "NIPPV",
-            "evaluation": "Definitively Does Not Meet",
-            "details": "Patient maintained adequate oxygenation on room air."
-          }
-        ]
-      }
-    },
-    {
-      "id": 10,
-      "name": "Linda Miller",
-      "hospital": "South County Hospital",
-      "admitDate": "04/04/2025",
-      "diagnosis": "Acute Renal Failure",
-      "status": "Pending Review",
-      "los": 4,
-      "primaryBarrier": "Nephrology Follow-up",
-      "lob": "Medicare",
-      "mrn": "66778",
-      "aiReview": "Likely Meets",
-      "reviewingDay": 3,
-      "nurse": { "name": "Nurse Andrew Davis", "phone": "555-901-2345" },
-      "physician": { "name": "Dr. Sophia Garcia", "phone": "555-109-8765" },
-      "history": [
-        {
-          "day": 1,
-          "summary": "Admitted with elevated creatinine and oliguria",
-          "details": "Started IV fluids. Nephrology consulted."
-        },
-        {
-          "day": 2,
-          "summary": "Improved urine output",
-          "details": "Creatinine still elevated but stable."
-        }
-      ],
-      "evaluationDetails": {
-        "criteria": [
-          {
-            "name": "Subset 1",
-            "evaluation": "Definitively Meets",
-            "details": "Acute kidney injury with creatinine >3.0."
-          }
-        ]
-      }
-    },
-    {
-      "id": 11,
-      "name": "William Taylor",
-      "hospital": "Metropolitan Medical Center",
-      "admitDate": "04/06/2025",
-      "diagnosis": "Gastrointestinal Bleed",
-      "status": "Approved",
-      "los": 3,
-      "primaryBarrier": "Endoscopy Scheduling",
-      "lob": "Commercial",
-      "mrn": "88990",
-      "aiReview": "Definitively Meets",
-      "reviewingDay": 2,
-      "nurse": { "name": "Nurse Daniel Park", "phone": "555-012-3456" },
-      "physician": { "name": "Dr. Rachel Johnson", "phone": "555-098-7654" },
-      "history": [
-        {
-          "day": 1,
-          "summary": "Admitted with melena and anemia",
-          "details": "Hemoglobin 8.2 g/dL. Started on proton pump inhibitor. Transfused 1 unit PRBC."
-        },
-        {
-          "day": 2,
-          "summary": "Endoscopy performed",
-          "details": "Found and treated gastric ulcer with visible vessel."
-        }
-      ],
-      "evaluationDetails": {
-        "criteria": [
-          {
-            "name": "Subset 2",
-            "evaluation": "Definitively Meets",
-            "details": "Active GI bleeding requiring intervention."
-          }
-        ]
-      }
-    },
-    {
-      "id": 12,
-      "name": "Patricia Thompson",
-      "hospital": "Harbor View Hospital",
-      "admitDate": "03/29/2025",
-      "diagnosis": "Cellulitis",
-      "status": "Under Review",
-      "los": 9,
-      "primaryBarrier": "Home IV Antibiotics Setup",
-      "lob": "Medicare Advantage",
-      "mrn": "11233",
-      "aiReview": "Possibly Meets",
-      "reviewingDay": 7,
-      "nurse": { "name": "Nurse Samantha Kim", "phone": "555-123-4567" },
-      "physician": { "name": "Dr. David Harris", "phone": "555-987-6543" },
-      "history": [
-        {
-          "day": 1,
-          "summary": "Admitted with right lower extremity erythema and swelling",
-          "details": "Started on IV antibiotics."
-        },
-        {
-          "day": 3,
-          "summary": "Minimal improvement",
-          "details": "Antibiotics broadened. Infectious Disease consulted."
-        },
-        {
-          "day": 5,
-          "summary": "Improved erythema",
-          "details": "Decreased swelling and pain."
-        }
-      ],
-      "evaluationDetails": {
-        "criteria": [
-          {
-            "name": "Subset 1",
-            "evaluation": "Possibly Meets",
-            "details": "Severe cellulitis requiring prolonged IV antibiotics."
-          }
-        ]
-      }
-    },
-    {
-      "id": 13,
-      "name": "Thomas Anderson",
-      "hospital": "Bayside Medical",
-      "admitDate": "04/09/2025",
-      "diagnosis": "Pulmonary Embolism",
-      "status": "Pending Review",
-      "los": 1,
-      "primaryBarrier": "Anticoagulation Management",
-      "lob": "Commercial",
-      "mrn": "33557",
-      "aiReview": "Definitively Meets",
-      "reviewingDay": 1,
-      "nurse": { "name": "Nurse Rebecca Wilson", "phone": "555-234-5678" },
-      "physician": { "name": "Dr. James Lee", "phone": "555-876-5432" },
-      "history": [
-        {
-          "day": 1,
-          "summary": "Admitted with shortness of breath and chest pain",
-          "details": "CT angiogram confirms bilateral pulmonary emboli. Started on anticoagulation."
-        }
-      ],
-      "evaluationDetails": {
-        "criteria": [
-          {
-            "name": "Subset 2",
-            "evaluation": "Definitively Meets",
-            "details": "Confirmed pulmonary embolism requiring anticoagulation."
-          }
-        ]
-      }
-    },
-    {
-      "id": 14,
-      "name": "Jennifer Wilson",
-      "hospital": "Ridgeview Medical Center",
-      "admitDate": "04/03/2025",
-      "diagnosis": "Acute Pancreatitis",
-      "status": "Approved",
-      "los": 5,
-      "primaryBarrier": "Pain Management",
-      "lob": "Medicaid",
-      "mrn": "55789",
-      "aiReview": "Likely Meets",
-      "reviewingDay": 4,
-      "nurse": { "name": "Nurse Jonathan Lee", "phone": "555-345-6789" },
-      "physician": { "name": "Dr. Elizabeth Chen", "phone": "555-765-4321" },
-      "history": [
-        {
-          "day": 1,
-          "summary": "Admitted with severe epigastric pain",
-          "details": "Elevated lipase. Started on IV fluids and pain control."
-        },
-        {
-          "day": 2,
-          "summary": "NPO status",
-          "details": "Continued IV hydration. Minimal oral intake tolerated."
-        },
-        {
-          "day": 3,
-          "summary": "Diet advancement",
-          "details": "Started clear liquid diet with improved pain."
-        }
-      ],
-      "evaluationDetails": {
-        "criteria": [
-          {
-            "name": "Subset 1",
-            "evaluation": "Definitively Meets",
-            "details": "Acute pancreatitis with lipase >3x upper limit of normal."
-          }
-        ]
-      }
-    },
-    {
-      "id": 15,
-      "name": "Charles Jackson",
-      "hospital": "Oakwood Hospital",
-      "admitDate": "04/07/2025",
-      "diagnosis": "COVID-19 Pneumonia",
-      "status": "Under Review",
-      "los": 3,
-      "primaryBarrier": "Oxygen Requirements",
-      "lob": "Medicare",
-      "mrn": "77456",
-      "aiReview": "Possibly Meets",
-      "reviewingDay": 2,
-      "nurse": { "name": "Nurse Maria Rodriguez", "phone": "555-456-7890" },
-      "physician": { "name": "Dr. William Taylor", "phone": "555-654-3210" },
-      "history": [
-        {
-          "day": 1,
-          "summary": "Admitted with hypoxia and positive COVID-19 test",
-          "details": "Started on supplemental oxygen, remdesivir, and dexamethasone."
-        },
-        {
-          "day": 2,
-          "summary": "Stable oxygen requirements",
-          "details": "Maintaining oxygen saturation >92% on 3L nasal cannula."
-        }
-      ],
-      "evaluationDetails": {
-        "criteria": [
-          {
-            "name": "pneumonia by imaging",
-            "evaluation": "Definitively Meets",
-            "details": "Chest X-ray shows bilateral infiltrates consistent with COVID-19 pneumonia."
-          },
-          {
-            "name": "O2 ≥ 40%",
-            "evaluation": "Definitively Does Not Meet",
-            "details": "Patient only requiring 3L nasal cannula, which is well below 40% oxygen."
-          }
-        ]
-      }
-    }
-  ]
+  {
+    "id": 1,
+    "name": "Robert Williams",
+    "hospital": "Northeastern Health",
+    "type": "Per Diem",
+    "admitDate": "2025-04-02",
+    "los": 6,
+    "nextReview": "2025-04-08",
+    "primaryDx": "Congestive Heart Failure",
+    "dischargePlanning": "Awaiting Placement",
+    "lob": "Commercial",
+    "aiReview": "Likely Meets"
+  },
+  {
+    "id": 2,
+    "name": "Jane Doe",
+    "hospital": "City General Hospital",
+    "type": "DRG",
+    "admitDate": "2025-03-28",
+    "los": 3,
+    "nextReview": "2025-03-30",
+    "primaryDx": "Pneumonia",
+    "dischargePlanning": "Insurance Approval",
+    "lob": "Medicare",
+    "aiReview": "Definitively Meets"
+  },
+  {
+    "id": 3,
+    "name": "John Smith",
+    "hospital": "Westside Medical Center",
+    "type": "Per Diem",
+    "admitDate": "2025-04-01",
+    "los": 10,
+    "nextReview": "2025-04-05",
+    "primaryDx": "Diabetes Complications",
+    "dischargePlanning": "Rehab Bed Availability",
+    "lob": "Medicaid",
+    "aiReview": "Definitively Does Not Meet"
+  },
+  {
+    "id": 4,
+    "name": "Maria Garcia",
+    "hospital": "Memorial Hospital",
+    "type": "DRG",
+    "admitDate": "2025-04-05",
+    "los": 4,
+    "nextReview": "2025-04-07",
+    "primaryDx": "COPD Exacerbation",
+    "dischargePlanning": "Awaiting Home O2 Setup",
+    "lob": "Medicare Advantage",
+    "aiReview": "Possibly Meets"
+  },
+  {
+    "id": 5,
+    "name": "James Johnson",
+    "hospital": "University Medical Center",
+    "type": "Per Diem",
+    "admitDate": "2025-03-30",
+    "los": 8,
+    "nextReview": "2025-04-03",
+    "primaryDx": "Sepsis",
+    "dischargePlanning": "Clinical Stability",
+    "lob": "Commercial",
+    "aiReview": "Definitively Meets"
+  },
+  {
+    "id": 6,
+    "name": "Emily Wilson",
+    "hospital": "Coastal Medical Center",
+    "type": "DRG",
+    "admitDate": "2025-04-08",
+    "los": 2,
+    "nextReview": "2025-04-10",
+    "primaryDx": "Acute Stroke",
+    "dischargePlanning": "Rehab Placement",
+    "lob": "Medicare",
+    "aiReview": "Likely Meets"
+  },
+  {
+    "id": 7,
+    "name": "Michael Brown",
+    "hospital": "Northside Hospital",
+    "type": "Per Diem",
+    "admitDate": "2025-04-03",
+    "los": 5,
+    "nextReview": "2025-04-08",
+    "primaryDx": "Acute Myocardial Infarction",
+    "dischargePlanning": "Cardiac Rehabilitation Placement",
+    "lob": "Commercial",
+    "aiReview": "Definitively Meets"
+  },
+  {
+    "id": 8,
+    "name": "Sarah Martinez",
+    "hospital": "Eastside Medical",
+    "type": "DRG",
+    "admitDate": "2025-04-07",
+    "los": 3,
+    "nextReview": "2025-04-10",
+    "primaryDx": "Diabetic Ketoacidosis",
+    "dischargePlanning": "Social Work Consult",
+    "lob": "Medicaid",
+    "aiReview": "Possibly Meets"
+  },
+  {
+    "id": 9,
+    "name": "David Lee",
+    "hospital": "Valley Regional Hospital",
+    "type": "Per Diem",
+    "admitDate": "2025-04-01",
+    "los": 7,
+    "nextReview": "2025-04-08",
+    "primaryDx": "Community Acquired Pneumonia",
+    "dischargePlanning": "Insurance Authorization",
+    "lob": "Commercial",
+    "aiReview": "Definitively Does Not Meet"
+  },
+  {
+    "id": 10,
+    "name": "Linda Miller",
+    "hospital": "South County Hospital",
+    "type": "DRG",
+    "admitDate": "2025-04-04",
+    "los": 4,
+    "nextReview": "2025-04-08",
+    "primaryDx": "Acute Renal Failure",
+    "dischargePlanning": "Nephrology Follow-up",
+    "lob": "Medicare",
+    "aiReview": "Likely Meets"
+  },
+  {
+    "id": 11,
+    "name": "William Taylor",
+    "hospital": "Metropolitan Medical Center",
+    "type": "Per Diem",
+    "admitDate": "2025-04-06",
+    "los": 3,
+    "nextReview": "2025-04-09",
+    "primaryDx": "Gastrointestinal Bleed",
+    "dischargePlanning": "Endoscopy Scheduling",
+    "lob": "Commercial",
+    "aiReview": "Definitively Meets"
+  },
+  {
+    "id": 12,
+    "name": "Patricia Thompson",
+    "hospital": "Harbor View Hospital",
+    "type": "DRG",
+    "admitDate": "2025-03-29",
+    "los": 9,
+    "nextReview": "2025-04-07",
+    "primaryDx": "Cellulitis",
+    "dischargePlanning": "Home IV Antibiotics Setup",
+    "lob": "Medicare Advantage",
+    "aiReview": "Possibly Meets"
+  },
+  {
+    "id": 13,
+    "name": "Thomas Anderson",
+    "hospital": "Bayside Medical",
+    "type": "Per Diem",
+    "admitDate": "2025-04-09",
+    "los": 1,
+    "nextReview": "2025-04-10",
+    "primaryDx": "Pulmonary Embolism",
+    "dischargePlanning": "Anticoagulation Management",
+    "lob": "Commercial",
+    "aiReview": "Definitively Meets"
+  },
+  {
+    "id": 14,
+    "name": "Jennifer Wilson",
+    "hospital": "Ridgeview Medical Center",
+    "type": "DRG",
+    "admitDate": "2025-04-03",
+    "los": 5,
+    "nextReview": "2025-04-08",
+    "primaryDx": "Acute Pancreatitis",
+    "dischargePlanning": "Pain Management",
+    "lob": "Medicaid",
+    "aiReview": "Likely Meets"
+  },
+  {
+    "id": 15,
+    "name": "Charles Jackson",
+    "hospital": "Oakwood Hospital",
+    "type": "Per Diem",
+    "admitDate": "2025-04-07",
+    "los": 3,
+    "nextReview": "2025-04-10",
+    "primaryDx": "COVID-19 Pneumonia",
+    "dischargePlanning": "Oxygen Requirements",
+    "lob": "Medicare",
+    "aiReview": "Possibly Meets"
+  }
+]

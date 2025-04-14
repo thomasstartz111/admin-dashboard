@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaComments } from 'react-icons/fa'; // Import the communication icon
 import DailyReviewModal from './DailyReviewModal';
+import EvaluationDetailsTable from './EvaluationDetailsTable';
+import { diffWords } from 'diff';
 
 const PatientDetailsModal = ({ patient, onClose }) => {
   const [selectedDay, setSelectedDay] = useState(null);
   const navigate = useNavigate();
+  const [editedClinicalNote, setEditedClinicalNote] = useState(patient.clinicalNote || ''); // Provide a default value
+
+
 
   const handleBackgroundClick = (e) => {
     if (e.target.classList.contains('modal-background')) {
@@ -13,19 +17,36 @@ const PatientDetailsModal = ({ patient, onClose }) => {
     }
   };
 
-  const navigateToPatientChart = () => {
-    // Logic to navigate to the patient's complete medical history
-    console.log(`Navigating to Patient Chart for ${patient.name}`);
-    // Example: window.location.href = `/patient-chart/${patient.id}`;
+  const openPatientChart = () => {
+    window.open(`/patient-chart/${patient.id}`, '_blank');
   };
 
-  const handleCommunicationClick = () => {
-    navigate('/communication', {
-      state: {
-        nurse: { name: 'Nurse Jane Doe', phone: '555-123-4567' },
-        physician: { name: 'Dr. John Smith', phone: '555-987-6543' },
-        patient,
-      },
+  const handleTextChange = (e) => {
+    setEditedClinicalNote(e.target.value);
+  };
+
+  const getHighlightedText = (originalText, editedText) => {
+    if (typeof originalText !== 'string' || typeof editedText !== 'string') {
+      return <span>No text available</span>;
+    }
+
+    const diff = diffWords(originalText, editedText);
+    return diff.map((part, index) => {
+      if (part.added) {
+        return (
+          <span key={index} className="text-blue-600">
+            {part.value}
+          </span>
+        );
+      } else if (part.removed) {
+        return (
+          <span key={index} className="text-red-600 line-through">
+            {part.value}
+          </span>
+        );
+      } else {
+        return <span key={index}>{part.value}</span>;
+      }
     });
   };
 
@@ -43,109 +64,74 @@ const PatientDetailsModal = ({ patient, onClose }) => {
           &times;
         </button>
 
-        {/* Patient Header */}
+        {/* Patient Information */}
         <div className="mb-6">
-          <div className="flex justify-between items-start">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800">
-                {patient.name}
-              </h2>
-              <p className="text-sm text-gray-600">
-                <strong>MRN:</strong> {patient.id} | <strong>DOB:</strong> {patient.dob} ({patient.age}) | <strong>Room:</strong> 4W-238 | <strong>Attending:</strong> Dr. Chen, L.
-              </p>
-              <p className="text-sm text-gray-600">
-                <strong>Admitted:</strong> {patient.admitDate} | <strong>Insurance:</strong> {patient.hospital} | <strong>Plan:</strong> Premium PPO | <strong>LOS:</strong> {patient.los} days | <strong>Hospital:</strong> {patient.hospital} | <strong>Diagnosis:</strong> {patient.diagnosis}
-              </p>
-            </div>
-            <div className="text-left mt-1">
-              <span
-                className={`px-4 py-2 rounded-full text-sm font-medium ${
-                  patient.status === 'Approved'
-                    ? 'bg-green-100 text-green-800'
-                    : patient.status === 'Pending Review'
-                    ? 'bg-orange-100 text-orange-800'
-                    : 'bg-red-100 text-red-800'
-                }`}
-              >
-                {patient.status}
-              </span>
-            </div>
-          </div>
+          <h2 className="text-2xl font-bold text-gray-800">{patient.name}</h2>
+          <p className="text-sm text-gray-600">
+            <strong>ID:</strong> {patient.id} | <strong>DOB:</strong> {patient.dob} | <strong>Age:</strong> {patient.age}
+          </p>
+          <p className="text-sm text-gray-600">
+            <strong>Hospital:</strong> {patient.hospital} | <strong>Admission Date:</strong> {patient.admitDate} | <strong>LOS:</strong> {patient.los} days
+          </p>
+          <p className="text-sm text-gray-600">
+            <strong>Primary Diagnosis:</strong> {patient.primaryDx} | <strong>Discharge Planning:</strong> {patient.dischargePlanning}
+          </p>
+          <p className="text-sm text-gray-600">
+            <strong>LOB:</strong> {patient.lob} | <strong>AI Review:</strong> {patient.aiReview}
+          </p>
         </div>
 
         {/* Patient Chart Button */}
         <div className="mb-6">
           <button
-            onClick={navigateToPatientChart}
+            onClick={openPatientChart}
             className="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600"
           >
             Patient Chart
           </button>
         </div>
 
-        {/* Daily Reviews Section */}
-        <div className="mb-6">
-          <h3 className="text-lg font-semibold mb-4">Daily Reviews</h3>
-          <div className="space-y-2">
-            {Array.from({ length: patient.los }, (_, i) => (
-              <div
-                key={i}
-                className="flex justify-between items-center p-3 border border-gray-200 rounded-md hover:bg-gray-50"
-              >
-                <span className="text-sm text-gray-800">
-                  <strong>Day {i + 1}:</strong>
-                </span>
-                <span
-                  className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    patient.dailyReviews?.[i]?.status === 'Approved'
-                      ? 'bg-green-100 text-green-800'
-                      : patient.dailyReviews?.[i]?.status === 'Pending Review'
-                      ? 'bg-orange-100 text-orange-800'
-                      : 'bg-red-100 text-red-800'
-                  }`}
-                >
-                  {patient.dailyReviews?.[i]?.status || 'Pending Review'}
-                </span>
-                <button
-                  onClick={() => setSelectedDay(i + 1)}
-                  className="text-blue-500 hover:underline text-sm"
-                >
-                  Utilization Management AI Review
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Clinical Note AI Summary */}
         <div className="mb-4">
           <h3 className="text-lg font-semibold mb-2">Clinical Note AI Summary</h3>
-          <textarea
-            className="w-full p-2 border border-gray-300 rounded-md"
-            rows="4"
-            placeholder="Enter clinical note AI summary..."
-          ></textarea>
+          <div className="w-full p-4 border border-gray-300 rounded-md bg-gray-50 text-sm text-gray-800">
+            <strong>Clinical Overview:</strong>
+            <textarea
+              className="w-full p-2 border border-gray-300 rounded-md text-sm text-gray-800"
+              value={editedClinicalNote}
+              onChange={handleTextChange}
+            />
+            <div className="mt-2">
+              <p>{getHighlightedText(patient.clinicalNote, editedClinicalNote)}</p>
+            </div>
+          </div>
         </div>
 
         {/* AI Review Summary */}
-        <div>
+        <div className="mb-4">
           <h3 className="text-lg font-semibold mb-2">AI Review Summary</h3>
-          <textarea
-            className="w-full p-2 border border-gray-300 rounded-md"
-            rows="4"
-            placeholder="Enter AI review summary..."
-          ></textarea>
+          <div className="w-full p-4 border border-gray-300 rounded-md bg-gray-50 text-sm text-gray-800">
+            <strong>Review Summary:</strong>
+            <p>
+              The patient definitively meets the overall criteria for Pneumonia, supported by Subset 1 and Subset 2.
+            </p>
+          </div>
         </div>
 
-     
-      {/* Daily Review Modal */}
-      {selectedDay && (
-        <DailyReviewModal
-          day={selectedDay}
-          review={patient.dailyReviews?.[selectedDay - 1]}
-          onClose={() => setSelectedDay(null)}
-        />
-    )}
+        {/* Evaluation Details Table */}
+        <div className="mb-4">
+          <h3 className="text-lg font-semibold mb-2">Evaluation Details</h3>
+          <EvaluationDetailsTable evaluationData={evaluationData} />
+        </div>
+
+        {/* Daily Review Modal */}
+        {selectedDay && (
+          <DailyReviewModal
+            day={selectedDay}
+            review={patient.dailyReviews?.[selectedDay - 1]}
+            onClose={() => setSelectedDay(null)}
+          />
+        )}
       </div>
     </div>
   );
